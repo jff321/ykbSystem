@@ -1,0 +1,38 @@
+{
+  "name": "ADbpx",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.2.1",
+    "element-china-area-data": "^4.1.1",
+    "element-ui": "^2.4.11",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "js-cookie": "^2.2.0",
+    "popper.js": "^1.14.6",
+    "v-viewer": "^1.4.0",
+    "vue": "^2.5.21",
+    "vue-amap": "^0.5.8",
+    "vue-json-excel": "^0.2.98",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-service": "^3.3.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.21"
+  }
+}
