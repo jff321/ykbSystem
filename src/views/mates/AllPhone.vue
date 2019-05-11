@@ -220,7 +220,7 @@
           this.start_date = val[0];
           this.end_date = val[1];
         }
-        this.getDetailList();
+        this.getAllPhone();
       },
       // 导出手机号
       async exportDetailMac(){
@@ -246,12 +246,12 @@
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`);
         this.pageSize = val;
-        this.getDetailList()
+        this.getAllPhone()
       },
       handleCurrentChange(val) {
         // console.log(`当前 ${val} 页`);
         this.currentPage = val;
-        this.getDetailList()
+        this.getAllPhone()
       },
     }
   }

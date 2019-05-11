@@ -10,15 +10,15 @@
         @keyup.enter.native="query"
       >
       </el-input>
-      <el-select clearable v-model="type" placeholder="请选择操作类型" class="mr-4">
-        <el-option
-          v-for="item in types"
-          :key="item.type"
-          :label="item.label"
-          :value="item.type"
-        >
-        </el-option>
-      </el-select>
+      <!--<el-select clearable v-model="type" placeholder="请选择操作类型" class="mr-4">-->
+        <!--<el-option-->
+          <!--v-for="item in types"-->
+          <!--:key="item.type"-->
+          <!--:label="item.label"-->
+          <!--:value="item.type"-->
+        <!--&gt;-->
+        <!--</el-option>-->
+      <!--</el-select>-->
       <el-date-picker
         class="mr-4"
         v-model="date"
@@ -116,6 +116,15 @@
           prop="times"
           sortable
         >
+        </el-table-column>
+        <el-table-column
+          label="操作"
+        >
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="toReport(scope.row.id)">财务明细</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -345,6 +354,15 @@
         let val2 = Number(obj2.re_money);
         return val1 - val2
       },
+      // 查看代理下面的客户明细
+      toReport(id){
+        this.$router.push({
+          path: 'lreport',
+          query: {
+            id: id
+          }
+        })
+      }
     }
   }
 </script>

@@ -4,7 +4,7 @@
     <div class="mt-4">
       <el-input
         class="inputStyle mr-4 mt-3"
-        placeholder="请输入账号"
+        placeholder="请输入账号/备注/说明"
         v-model="input"
         clearable
         @keyup.enter.native="query"
@@ -47,17 +47,20 @@
           label="用户"
           prop="uname"
           sortable
+          width="100"
         >
         </el-table-column>
-        <!--<el-table-column-->
-          <!--label="账号"-->
-          <!--prop="phone"-->
-          <!--sortable-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
+        <el-table-column
+          label="账号"
+          prop="mobile"
+          sortable
+          width="120"
+        >
+        </el-table-column>
         <el-table-column
           label="操作类型"
           sortable
+          width="100"
         >
           <template slot-scope="scope">
             <span v-if="scope.row.types === 1">充值</span>
@@ -78,11 +81,13 @@
           prop="b_money"
           label="操作前余额"
           sortable
+          width="130"
         >
         </el-table-column>
         <el-table-column
           label="金额"
           sortable
+          width="110"
         >
           <template slot-scope="scope">
             <span v-if="scope.row.model === 1" style="color: #67C23A;">+ {{scope.row.money}}</span>
@@ -93,13 +98,22 @@
           prop="a_money"
           label="操作后余额"
           sortable
+          width="130"
         >
         </el-table-column>
         <el-table-column
           prop="remark"
           label="备注"
           sortable
-          width="320"
+          width="300"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="intro"
+          label="说明"
+          sortable
+          width="250"
           align="center"
         >
         </el-table-column>
@@ -107,6 +121,7 @@
           prop="times"
           label="更新时间"
           sortable
+          width="200"
         >
         </el-table-column>
       </el-table>
@@ -298,6 +313,6 @@
     font-size: 28px;
   }
   .inputStyle{
-    width: 15%;
+    width: 20%;
   }
 </style>

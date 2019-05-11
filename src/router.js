@@ -121,6 +121,14 @@ export default new Router({
       component: () => import('./views/finance/Report.vue')
     },
     {
+      path: '/finance/lreport', // 后台-->财务管理-->用户财务报表(总管理员看代理下面的客户财务明细)
+      name: 'lreport',
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
+      component: () => import('./views/finance/Lreport.vue')
+    },
+    {
       path: '/finance/userLists', // 后台-->客户-->财务明细
       name: 'userLists',
       meta: {

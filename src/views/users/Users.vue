@@ -1324,7 +1324,7 @@
         }
       },
       // 绑定盒子对话框
-      handleBindBox(index, userId){
+      handleBindBox(userId){
         this.userBindId = userId;
         // this.userBindIndex = index;
         this.bindVisible = true;

@@ -47,3 +47,14 @@ export async function  exportUserfunlists (keys, types, start_date, end_date){
   const result = axios.get(`manage/finance/out_report?keys=${keys}&types=${types}&start_date=${start_date}&end_date=${end_date}`);
   return result ? result : false
 }
+// 总管理查看代理商下面的用户财务明细
+export async function  userfunDetail (id, keys, types, start_date, end_date, page, limit){
+  const result = axios.get(`manage/finance/relist?id=${id}&keys=${keys}&types=${types}&start_date=${start_date}&end_date=${end_date}&page=${page}&limit=${limit}`);
+  return result ? result : false
+}
+
+// 总管理查看代理商下面的用户财务明细并导出
+export async function  exportUserfunDetail (id, keys, types, start_date, end_date){
+  const result = axios.get(`manage/finance/out_relist?id=${id}&keys=${keys}&types=${types}&start_date=${start_date}&end_date=${end_date}`);
+  return result ? result : false
+}
