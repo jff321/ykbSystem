@@ -68,7 +68,7 @@
         if (!value) {
           return callback(new Error('手机号不能为空'));
         } else {
-          const reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+          const reg = /^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[0-9])\d{8}$/;
           // console.log(reg.test(value));
           if (reg.test(value)) {
             callback();
