@@ -38,7 +38,7 @@
           sortable
         >
           <template slot-scope="scope">
-            <span v-if="scope.row.adcode === 0&&scope.row.adcode === 0">未选择</span>
+            <span v-if="scope.row.adcode === 0&&scope.row.cdcode === 0">未选择</span>
             <span v-else>{{CodeToText[str(scope.row.adcode)]+CodeToText[str(scope.row.cdcode)]}}</span>
           </template>
         </el-table-column>

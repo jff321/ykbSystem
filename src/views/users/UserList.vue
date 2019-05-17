@@ -2,6 +2,14 @@
   <div>
     <div class="my-3">
       <el-input class="w-25" v-model="input" placeholder="请输入登录账号/公司名称/负责人" @keyup.enter.native="query"></el-input>
+      <el-cascader
+        placeholder="请选择地区"
+        class="inputStyle ml-3"
+        size="large"
+        :options="options"
+        v-model="selectedOptions"
+        @change="handleChange2">
+      </el-cascader>
       <el-button type="primary" class="mx-3" @click="query">查询</el-button>
       <el-button type="success" @click="openAddDialog">新增</el-button>
       <el-button class="mx-4" type="warning" @click="exportExcel">导出excel</el-button>
@@ -1041,6 +1049,10 @@
         exportLink: '',
         excelText: '数据获取中...',
         isLoading: true,
+        options: provinceAndCityData,
+        selectedOptions: [],
+        province_id: '',
+        city_id: ''
       }
     },
     async mounted(){
@@ -1048,7 +1060,7 @@
     },
     methods: {
       async getUserList(){
-        const result = await usersList(this.input, this.currentPage, this.pageSize);
+        const result = await usersList(this.input, this.province_id, this.city_id, this.currentPage, this.pageSize);
         this.loading = false;
         if(result.data.code === 200){
           this.list = result.data.data.list;
@@ -1552,6 +1564,12 @@
         } else {
           this.$status(result.data.msg);
         }
+      },
+
+      // 选择地址并赋值
+      handleChange2 (value) {
+        this.province_id = Number(value[0]);
+        this.city_id = Number(value[1]);
       },
     }
   }

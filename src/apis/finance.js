@@ -7,8 +7,8 @@ export async function  finance (id, keys, types, start_date, end_date, page, lim
 }
 
 // 财务统计列表(代理)
-export async function  counts (id, keys, types, start_date, end_date, page, limit){
-  const result = axios.get(`manage/finance/counts?id=${id}&keys=${keys}&types=${types}&start_date=${start_date}&end_date=${end_date}&page=${page}&limit=${limit}`);
+export async function  counts (id, keys, types, start_date, end_date, province_id, city_id, page, limit){
+  const result = axios.get(`manage/finance/counts?id=${id}&keys=${keys}&types=${types}&start_date=${start_date}&end_date=${end_date}&province_id=${province_id}&city_id=${city_id}&page=${page}&limit=${limit}`);
   return result ? result : false
 }
 

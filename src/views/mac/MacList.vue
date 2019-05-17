@@ -521,6 +521,7 @@
       queryMac(){
         this.getTodayMac();
       },
+      // 导出excel
       async exportMacExcel(){
         this.macVisible = true;
         document.getElementById('test').onclick = function(ev){

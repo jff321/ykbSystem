@@ -48,6 +48,12 @@ export function commitPay(data) {
   return result ? result : false
 }
 
+// 虚拟充值提交
+export function commitInventPay(data) {
+  const result = axios.post(`manage/agents/onpays`, data);
+  return result ? result : false
+}
+
 // 提现提交
 export function commitCash(data) {
   const result = axios.post(`manage/agents/cashed`, data);

@@ -90,30 +90,27 @@
             <span v-if="scope.row.types === 6">退款</span>
           </template>
         </el-table-column>
-        <!--<el-table-column-->
-          <!--prop="area"-->
-          <!--label="地区"-->
-          <!--sortable-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
+        <el-table-column
+          label="地区"
+          sortable
+        >
+          <template slot-scope="scope">
+            <span v-if="scope.row.province_id === 0&&scope.row.city_id === 0">未选择</span>
+            <span v-else>{{CodeToText[str(scope.row.province_id)]+CodeToText[str(scope.row.city_id)]}}</span>
+          </template>
+        </el-table-column>
         <el-table-column
           prop="contact"
           label="操作人"
           sortable
         >
         </el-table-column>
-        <!--<el-table-column-->
-          <!--prop="name"-->
-          <!--label="姓名"-->
-          <!--sortable-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
-        <!--<el-table-column-->
-          <!--prop="userPhone"-->
-          <!--label="账号"-->
-          <!--sortable-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
+        <el-table-column
+          prop="mobile"
+          label="账号"
+          sortable
+        >
+        </el-table-column>
         <el-table-column
           prop="b_money"
           label="操作前余额"
@@ -272,6 +269,8 @@
         isLoading: true,
         options: provinceAndCityData,
         selectedOptions: [],
+        province_id: '',
+        city_id: ''
       }
     },
     mounted(){
@@ -279,7 +278,7 @@
     },
     methods: {
       async getCountsList () {
-        const result = await counts('', this.input, this.type, this.start_time, this.end_time, this.currentPage, this.pageSize);
+        const result = await counts('', this.input, this.type, this.start_time, this.end_time, this.province_id, this.city_id, this.currentPage, this.pageSize);
         this.loading = false;
         if(result.data.code === 200){
           this.list = result.data.data.list;
@@ -340,8 +339,8 @@
       },
       // 选择地址并赋值
       handleChange (value) {
-        // console.log(this.ruleForm.selectedOptions);
-        this.ruleForm.address = CodeToText[value[0]]+""+CodeToText[value[1]];
+        this.province_id = Number(value[0]);
+        this.city_id = Number(value[1]);
       },
     }
   }

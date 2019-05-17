@@ -34,13 +34,13 @@
           </div>
         </el-col>
         <el-col :span="6">
-          <!--总消费-->
+          <!--累计退款-->
           <div class="shadow p-3">
             <p class="font-weight-bold">
               <img src="../../assets/yue.png" alt="" style="width: 35px;height: 35px;">
-              外拨消费
+              累计退款
             </p>
-            <p class="flow">{{userTotal.tel_money}}</p>
+            <p class="flow">{{userTotal.re_money}}</p>
           </div>
         </el-col>
       </el-row>
@@ -76,13 +76,55 @@
           </div>
         </el-col>
         <el-col :span="6">
-          <!--累计退款-->
+          <!--总消费-->
           <div class="shadow p-3">
             <p class="font-weight-bold">
               <img src="../../assets/yue.png" alt="" style="width: 35px;height: 35px;">
-              累计退款
+              外拨消费
             </p>
-            <p class="flow">{{userTotal.re_money}}</p>
+            <p class="flow">{{userTotal.tel_money}}</p>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row class="mt-4" :gutter="20">
+        <el-col :span="6">
+          <!--匹配消费-->
+          <div class="shadow p-3">
+            <p class="font-weight-bold">
+              <img src="../../assets/yue.png" alt="" style="width: 35px;height: 35px;">
+              匹配消费余额
+            </p>
+            <p class="flow">{{userTotal.mate_over}}</p>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <!--短信消费-->
+          <div class="shadow p-3">
+            <p class="font-weight-bold">
+              <img src="../../assets/yue.png" alt="" style="width: 35px;height: 35px;">
+              短信消费余额
+            </p>
+            <p class="flow">{{userTotal.sms_over}}</p>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <!--闪信消费-->
+          <div class="shadow p-3">
+            <p class="font-weight-bold">
+              <img src="../../assets/yue.png" alt="" style="width: 35px;height: 35px;">
+              闪信消费余额
+            </p>
+            <p class="flow">{{userTotal.fms_over}}</p>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <!--总消费-->
+          <div class="shadow p-3">
+            <p class="font-weight-bold">
+              <img src="../../assets/yue.png" alt="" style="width: 35px;height: 35px;">
+              外拨消费余额
+            </p>
+            <p class="flow">{{userTotal.tel_over}}</p>
           </div>
         </el-col>
       </el-row>

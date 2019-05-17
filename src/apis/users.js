@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 // 用户列表, 搜索用户列表
-export async function  users(keys, page, limit){
-  const result = axios.get('manage/users?keys='+keys+'&page='+page+'&limit='+limit);
+export async function  users(keys, province_id, city_id, page, limit){
+  const result = axios.get('manage/users?keys='+keys+'&province_id='+province_id+'&city_id='+city_id+'&page='+page+'&limit='+limit);
   return result ? result : false
 }
 
 // 用户列表, 搜索用户列表
-export async function  usersList(keys, page, limit){
-  const result = axios.get('manage/users/userlist?keys='+keys+'&page='+page+'&limit='+limit);
+export async function  usersList(keys, province_id, city_id, page, limit){
+  const result = axios.get('manage/users/userlist?keys='+keys+'&province_id='+province_id+'&city_id='+city_id+'&page='+page+'&limit='+limit);
   return result ? result : false
 }
 

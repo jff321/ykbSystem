@@ -124,9 +124,13 @@
             @click="handleRecharge(scope.row.id)">充值</el-button>
           <el-button
             size="mini"
+            @click="handleRecharge2(scope.row.id)">虚拟充值</el-button>
+          <el-button
+            size="mini"
             @click="handleCash(scope.row.id)">退款</el-button>
           <el-button
             size="mini"
+            class="ml-0"
             style="margin-right: 10px;"
             @click="handleSet(scope.row.id)">设置</el-button>
           <el-button
@@ -266,6 +270,34 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="payClose('payForm')">取 消</el-button>
         <el-button type="primary" @click="submitPay('payForm')" :disabled="buttonDisabled">{{payText}}</el-button>
+      </div>
+    </el-dialog>
+
+    <!--虚拟充值对话框-->
+    <el-dialog title="虚拟充值" :visible.sync="payVisible2" width="700px" center :before-close="handlePayClose2">
+      <el-form :model="payForm2" :rules="payRules2" ref="payForm2">
+        <el-form-item label="登录账号 :" :label-width="formLabelWidth">
+          <p>{{payForm2.payAgent ? payForm2.payAgent : '无'}}</p>
+        </el-form-item>
+        <el-form-item label="联系人 :" :label-width="formLabelWidth">
+          <p>{{payForm2.payContact}}</p>
+        </el-form-item>
+        <el-form-item label="短信充值" :label-width="formLabelWidth" prop="sms">
+          <el-input type="number" v-model.number="payForm2.sms" autocomplete="off" class="w-75"></el-input>
+        </el-form-item>
+        <el-form-item label="闪信充值" :label-width="formLabelWidth" prop="fms">
+          <el-input type="number" v-model.number="payForm2.fms" autocomplete="off" class="w-75"></el-input>
+        </el-form-item>
+        <el-form-item label="匹配充值" :label-width="formLabelWidth" prop="mate">
+          <el-input type="number" v-model.number="payForm2.mate" autocomplete="off" class="w-75"></el-input>
+        </el-form-item>
+        <el-form-item label="拨号充值" :label-width="formLabelWidth" prop="tel">
+          <el-input type="number" v-model.number="payForm2.tel" autocomplete="off" class="w-75"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="payClose2('payForm2')">取 消</el-button>
+        <el-button type="primary" @click="submitPay2('payForm2')" :disabled="buttonDisabled2">{{payText2}}</el-button>
       </div>
     </el-dialog>
     <!--退款对话框-->
@@ -446,6 +478,7 @@
     commitCost,
     commitPwd,
     commitPay,
+    commitInventPay,
     bindBox
   } from "../../apis/agents";
   import {
@@ -475,6 +508,7 @@
         logoImages: [],
         loading: true,
         buttonDisabled: false,
+        buttonDisabled2: false,
         currentPage: 1,
         pageSize: 10,
         total: 0,
@@ -497,6 +531,7 @@
         },
         // userPayIndex: 0,
         userPayId: 0,
+        userPayId2: 0,
         // userCashIndex: 0,
         userCashId: 0,
         userEditId: 0,
@@ -572,6 +607,35 @@
             { required: true, message: '请输入充值金额', trigger: 'blur' },
             { type: 'number', min: 0, message: '金额必须为数字且大于0', trigger: 'blur'}
           ],
+        },
+
+        payVisible2: false,
+        payText2: '充值',
+        payForm2: {
+          payAgent: '',
+          payContact: '',
+          sms: '',
+          fms: '',
+          mate: '',
+          tel: '',
+        },
+        payRules2: {
+          sms: [
+            { required: true, message: '请输入短信扣费单价（元/条）', trigger: 'blur' },
+            { type: 'number', message: '金额必须为数字', trigger: 'blur'}
+          ],
+          fms: [
+            { required: true, message: '请输入闪信扣费单价（元/条）', trigger: 'blur' },
+            { type: 'number', message: '金额必须为数字', trigger: 'blur'}
+          ],
+          mate: [
+            { required: true, message: '请输入金额', trigger: 'blur' },
+            { type: 'number', message: '金额必须为数字', trigger: 'blur'}
+          ],
+          tel: [
+            { required: true, message: '请选择拨号扣费单价（元/分钟）', trigger: 'blur' },
+            { type: 'number', message: '金额必须为数字', trigger: 'blur'}
+          ]
         },
         cashVisible: false,
         cashDisabled: false,
@@ -899,6 +963,60 @@
         });
       },
 
+      // 虚拟充值显示
+      async handleRecharge2(userId){
+        this.buttonDisabled2 = false;
+        this.payText2 = '充值';
+        // this.userPayIndex = index;
+        this.userPayId2 = userId;
+        const result = await showAgent(userId);
+        if (result.data.code === 200) {
+          this.payVisible2 = true;
+          this.payForm2.payAgent = result.data.data.mobile;
+          this.payForm2.payContact = result.data.data.contact;
+          this.payForm2.sms = result.data.data.sms_pay;
+          this.payForm2.fms = result.data.data.fms_pay;
+          this.payForm2.mate = result.data.data.mate_pay;
+          this.payForm2.tel = result.data.data.tel_pay;
+        } else {
+          this.$status(result.data.msg);
+        }
+      },
+      // 虚拟充值提交
+      submitPay2(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.buttonDisabled2 = true;
+            this.payText2 = '充值中...';
+            let params = {
+              id: this.userPayId2,
+              sms_pay: this.payForm2.sms,
+              fms_pay: this.payForm2.fms,
+              tel_pay: this.payForm2.tel,
+              mate_pay: this.payForm2.mate,
+            };
+            commitInventPay(params).then((result)=>{
+              // console.log('result:', result);
+              if(result.data.code === 200){
+                this.$message({
+                  message: result.data.msg,
+                  type: 'success'
+                });
+                this.payVisible2 = false;
+                this.buttonDisabled2 = false;
+                this.payText2 = '充值';
+              } else {
+                this.$status(result.data.msg);
+                this.buttonDisabled2 = false;
+                this.payText2 = '充值';
+              }
+            });
+          } else {
+            return false;
+          }
+        });
+      },
+
       // 退款显示
       async handleCash(userId){
         this.cashDisabled = false;
@@ -955,7 +1073,6 @@
         const result = await showAgent(userId);
         if (result.data.code === 200) {
           this.setDialogVisible = true;
-          // ？？？此处字段名没有  新增之后才有
           this.setForm.sms = result.data.data.setting.sms;
           this.setForm.fms = result.data.data.setting.fms;
           this.setForm.mate = result.data.data.setting.mate;
@@ -1158,6 +1275,16 @@
       // 充值弹框关闭按钮
       handlePayClose(){
         this.payClose('payForm');
+      },
+
+      // 虚拟充值弹框取消按钮
+      payClose2(formName){
+        this.payVisible2 = false;
+        this.$refs[formName].clearValidate();
+      },
+      // 虚拟充值弹框关闭按钮
+      handlePayClose2(){
+        this.payClose2('payForm2');
       },
       // 退款弹框取消按钮
       cashClose(formName){

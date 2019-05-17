@@ -35,3 +35,15 @@ export function editSms(id, data) {
   const result = axios.put(`manage/sms/${id}`, data);
   return result ? result : false
 }
+
+// 短信闪信报表
+export async function  usersms (keys, types, start_date, end_date, page, limit){
+  const result = axios.get('manage/sms/usersms?keys='+keys+'&types='+types+'&start_date='+start_date+'&end_date='+end_date+'&page='+page+'&limit='+limit);
+  return result ? result : false
+}
+
+// 短信闪信报表
+export async function  exportSms (keys, types, start_date, end_date){
+  const result = axios.get('manage/sms/out_sms?keys='+keys+'&types='+types+'&start_date='+start_date+'&end_date='+end_date);
+  return result ? result : false
+}

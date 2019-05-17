@@ -154,7 +154,7 @@
     methods: {
       // 短信列表
       async getSmsLogList(){
-        const result = await smsLog(this.input, this.type, this.start_time, this.end_time, this.currentPage, this.pageSize);
+        const result = await smsLog(this.$route.query.id, this.input, this.type, this.start_time, this.end_time, this.currentPage, this.pageSize);
         // console.log('RESULT:', result);
         this.loading = false;
         if(result.data.code === 200){
