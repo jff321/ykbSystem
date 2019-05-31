@@ -36,14 +36,12 @@ commonFun.install = function (Vue) {
     }
   };
 
-  // 按金额排序
-  // Vue.prototype.sortByMoney = function (property) {
-  //   return function(a,b){
-  //     var value1 = a[property];
-  //     var value2 = b[property];
-  //     return value1 - value2;
-  //   }
-  // };
+  // 隐藏手机中间四位
+  Vue.prototype.hidePhone = function (phone) {
+    if(phone){
+      return phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2");
+    }
+  }
 };
 
 export default commonFun;

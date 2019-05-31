@@ -974,10 +974,10 @@
           this.payVisible2 = true;
           this.payForm2.payAgent = result.data.data.mobile;
           this.payForm2.payContact = result.data.data.contact;
-          this.payForm2.sms = result.data.data.sms_pay;
-          this.payForm2.fms = result.data.data.fms_pay;
-          this.payForm2.mate = result.data.data.mate_pay;
-          this.payForm2.tel = result.data.data.tel_pay;
+          this.payForm2.sms = Number(result.data.data.sms_pay);
+          this.payForm2.fms = Number(result.data.data.fms_pay);
+          this.payForm2.mate = Number(result.data.data.mate_pay);
+          this.payForm2.tel = Number(result.data.data.tel_pay);
         } else {
           this.$status(result.data.msg);
         }

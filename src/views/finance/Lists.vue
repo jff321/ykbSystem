@@ -47,14 +47,14 @@
           label="用户"
           prop="uname"
           sortable
-          width="100"
+          width="120"
         >
         </el-table-column>
         <el-table-column
-          label="账号"
           prop="mobile"
+          label="账号"
           sortable
-          width="120"
+          width="130"
         >
         </el-table-column>
         <el-table-column
@@ -105,7 +105,6 @@
           prop="remark"
           label="备注"
           sortable
-          width="300"
           align="center"
         >
         </el-table-column>
@@ -113,7 +112,6 @@
           prop="intro"
           label="说明"
           sortable
-          width="250"
           align="center"
         >
         </el-table-column>

@@ -106,7 +106,7 @@
         >
         </el-table-column>
         <el-table-column
-          prop="mobile"
+          prop="to_user"
           label="账号"
           sortable
         >

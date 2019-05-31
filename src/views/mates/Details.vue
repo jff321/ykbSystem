@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="navigation">匹配列表/匹配详情</div>
     <!--搜索-->
     <div class="mt-3">
       <div>
@@ -56,7 +57,7 @@
         >
           <template slot-scope="scope">
             <span v-if="group_id === 3" @click="modifyPhone(scope.$index, scope.row.mac_id, scope.row.id)" style="cursor: pointer">{{scope.row.phone}}</span>
-            <span v-else>{{scope.row.phone}}</span>
+            <span v-else>{{hidePhone(scope.row.phone)}}</span>
           </template>
         </el-table-column>
         <el-table-column

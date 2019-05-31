@@ -65,6 +65,13 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="ren"
+          label="触达人数"
+          :sortable="true"
+          :sort-method="sortByRen"
+        >
+        </el-table-column>
+        <el-table-column
           prop="nums"
           label="总数量"
           :sortable="true"
@@ -153,6 +160,7 @@
     name: "Template",
     data(){
       return{
+        group_id: Number(localStorage.getItem('group_id')),
         input: '',
         types: [
           {
@@ -305,12 +313,18 @@
         let val2 = Number(obj2.money);
         return val1 - val2
       },
+      // 按触达人数排序
+      sortByRen(obj1, obj2){
+        let val1 = Number(obj1.ren);
+        let val2 = Number(obj2.ren);
+        return val1 - val2
+      },
     }
   }
 </script>
 
 <style scoped>
-  .inputStyle{
-    width: 15%;
-  }
+.inputStyle{
+  width: 15%;
+}
 </style>

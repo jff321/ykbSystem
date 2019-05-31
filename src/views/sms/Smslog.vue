@@ -95,6 +95,7 @@
     name: "SmsLog",
     data() {
       return {
+        group_id: Number(localStorage.getItem('group_id')),
         input: '',
         types: [
           {
